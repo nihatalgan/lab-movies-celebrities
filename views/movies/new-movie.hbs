@@ -1,0 +1,42 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Movie Create Page</title>
+  </head>
+  <body>
+
+    <h2>Movie Create Page</h2>
+    <form action="/movies/create" method="post">
+      <label>
+        Title:
+        <input type="text" name="title" />
+      </label>
+
+      <label>
+        Genre:
+        <input type="text" name="genre" />
+      </label>
+
+      <label>
+        Plot:
+        <input type="text" name="plot" />
+      </label>
+
+      <label for="celebrity-select">
+        Cast:
+        <select name="cast">
+          <option disable selected value=""></option>
+          {{#each celebrities}}
+            <option value="{{this._id}}"> {{this.name}} </option>
+          {{/each}}
+        </select>
+      </label>
+      <br />
+
+      <button type="submit"> Create </button>
+
+    </form>
+
+  </body>
+</html>
