@@ -51,10 +51,7 @@ router.get("/movies/:movieId", (req, res) => {
       console.log("movie", movie);
       res.render("movies/movie-details", movie);
     })
-    .catch((error) => {
-      console.log("Error while getting the movies from the DB: ", error);
-      next(error);
-    });
+    .catch((err) => console.log(err));
 });
 
 router.post("/movies/:id/delete", (req, res, next) => {
@@ -64,4 +61,41 @@ router.post("/movies/:id/delete", (req, res, next) => {
     .catch((err) => console.log(err));
 });
 
+router.get("/movies/:id/edit", (req, res) => {
+  Movie.findById(req.params.id)
+  .populate("cast")  
+  .then((foundMovie) => {
+    console.log("Found Movie:", foundMovie);
+    res.render("movies/edit-movie", foundMovie);
+  });
+});
+
+router.post("/movies/:id", (req, res, next) => {
+  //
+  Movie.findByIdAndUpdate(req.params.id, req.body)
+    .then(() => res.redirect("/movies"))
+    .catch((err) => console.log(err));
+});
+
 module.exports = router;
+
+// router.get("/movies/:id/edit", (req, res) => {
+//   Movie.findById(req.params.id)
+//     .then((foundMovie) => {
+//       // console.log("Found Movie:", foundMovie);
+//       // res.render("movies/edit-movie", foundMovie);
+//     })
+//     .then(() =>  Celebrity.find()
+//       .then((allCelebritiesFromDB) => {
+//       res.render("movies/edit-movie", foundMovie, {
+//         celebrities: allCelebritiesFromDB,
+//       });
+// }));
+// router.get("/movies/:id/edit", (req, res) => {
+//   Movie.findById(req.params.id).then((foundMovie) => {
+//     console.log("Found Movie:", foundMovie);
+//     Celebrity.find().then((allCelebritiesFromDB) =>
+//       res.render("movies/edit-movie", allCelebritiesFromDB, foundMovie)
+//     );
+//   });
+// });

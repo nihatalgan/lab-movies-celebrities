@@ -25,10 +25,7 @@ router.get("/celebrities", (req, res) => {
         celebrities: allCelebritiesFromDB,
       });
     })
-    .catch((error) => {
-      console.log("Error while getting the celebrities from the DB: ", error);
-      next(error);
-    });
+    .catch((err) => console.log(err));
 });
 
 module.exports = router;

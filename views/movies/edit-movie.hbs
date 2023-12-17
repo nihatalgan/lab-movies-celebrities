@@ -1,0 +1,30 @@
+<h2>Movie Edit Page</h2>
+
+<form action="/movies/{{_id}}" method="post">
+  <label for="">
+    Title:
+    <input type="text" name="title" value="{{title}}" />
+  </label>
+  <label for="">
+    Genre:
+    <input name="genre" value="{{genre}}" />
+  </label>
+  <label for="">
+    Plot:
+    <input name="plot" value="{{plot}}" />
+  </label>
+  {{!-- <label for="">
+    Cast:
+    <input name="plot" value="{{cast}}" />
+  </label> --}}
+  <select>
+    {{#each cast}}
+      <option>
+        {{this.name}}
+      </option>
+
+    {{/each}}
+
+  </select>
+  <button type="submit">Update movie</button>
+</form>
